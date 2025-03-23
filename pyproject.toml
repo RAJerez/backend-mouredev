@@ -1,16 +1,15 @@
-[project]
-name = "fastapi"
+[tool.poetry]
+name = "fastapi-moure"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "RAJerez",email = "rodrigoagustin23@gmail.com"}
-]
+authors = ["RAJerez <rodrigoagustin23@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["standard"], version = "^0.115.11"}
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
