@@ -1,14 +1,11 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-# Inicia el server: uvicorn users:app --reload
 
 router = APIRouter(prefix="/users",
                    tags=["users"],
                    responses={404: {"message":"No encontrado"}})
 
-
-# Creamos nuestro objeto de modelo de la Entidad User
 
 class User(BaseModel):
     id: int
@@ -18,14 +15,10 @@ class User(BaseModel):
     age: int
 
 
-# Base de datos ficticia
-
 users_list = [User(id=1, name="Brais", surname="Moure", url="https://moure.dev", age=35),
               User(id=2, name="Moure", surname="Dev", url="https://mouredev.com", age=36),
               User(id=3, name="Brais", surname="Dahlberg", url="https://haakon.com", age=37)]
 
-
-# OPERACIONES GET
 
 @router.get("/usersjson")
 async def usersjson():
@@ -38,28 +31,16 @@ async def usersjson():
 async def users():
     return users_list
 
-# PATH
-# Se puede usar cuando se trata de un PARAMETRO OBLIGATORIO
-# Ejemplo de parametros que pueden ir por el PATH de la URL --> "/user/{id}"
 
 @router.get("/user/{id}")
 async def user(id: int):
     return search_user(id)
-    
 
-# QUERY
-# Se puede usar cuando se trata de un PARAMETRO OPCIONAL
-# Ejemplo de parametros que pueden ir por la QUERY --> "/user/{id}"
-# Asi podemos comenzar a igualar una clave a un valor dentro de la URL
-# http://127.0.0.1:8000/user/?id=1&name=Brais
 
 @router.get("/user/")
 async def user(id: int, name: str):
     return search_user(id)
 
-
-
-# OPERACIONES POST
 
 @router.post("/user/", response_model=User, status_code=201)
 async def user(user: User):
@@ -69,8 +50,6 @@ async def user(user: User):
     return user
 
 
-
-# OPERACIONES PUT
 @router.put("/user/")
 async def user(user: User):
 
@@ -87,8 +66,6 @@ async def user(user: User):
         return user
 
 
-# OPERACIONES DELETE
-
 @router.delete("/user/{id}")
 async def user(id: int):
 
@@ -103,13 +80,6 @@ async def user(id: int):
         return {"error": "No se ha eliminado el usuario"}
 
 
-
-
-
-
-
-
-# OPERACIONES NO EXPUESTAS EN LA API
 def search_user(id: int):
     users = filter(lambda user: user.id == id, users_list)
     try:

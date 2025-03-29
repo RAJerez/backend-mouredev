@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "fastapi-moure"
+name = "app-fastapi-mongo"
 version = "0.1.0"
 description = ""
 authors = ["RAJerez <rodrigoagustin23@gmail.com>"]
