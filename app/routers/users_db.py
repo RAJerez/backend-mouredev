@@ -1,8 +1,9 @@
 from fastapi import APIRouter, HTTPException, status
-from app.db.models.user import User
-from app.db.client import db_client
-from app.db.schemas.user import user_schema, users_schema
+from db.models.user import User
+from db.client import db_client
+from db.schemas.user import user_schema, users_schema
 from bson import ObjectId
+
 
 router = APIRouter(prefix="/userdb",
                    tags=["userdb"],
@@ -38,6 +39,7 @@ async def user(user: User):
     new_user = user_schema(db_client.users.find_one({"_id": id}))
 
     return User(**new_user)
+
 
 @router.put("/", response_model=User)
 async def user(user: User):

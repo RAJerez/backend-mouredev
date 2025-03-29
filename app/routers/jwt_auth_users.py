@@ -5,6 +5,7 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_DURATION = 1
 SECRET = "6ca47231720c54becb030f5b074e6e5efdd08a238a9315e5c285ad71d20e2f4b"
@@ -15,8 +16,6 @@ oauth2 = OAuth2PasswordBearer(tokenUrl="login")
 
 # Definiendo un contexto de encriptación
 crypt = CryptContext(schemes=["bcrypt"])
-
-
 
 # Datos a nivel Entidad sin contraseña
 class User(BaseModel):

@@ -7,7 +7,21 @@ services:
     restart: unless-stopped
     volumes:
       - mongodb_data:/data/db
-      #- ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro  # Script de inicialización
+  
+  app:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: app
+    #env_file:
+    #  - .env.deploy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - mongodb
+    restart: unless-stopped
 
 volumes:
   mongodb_data:
